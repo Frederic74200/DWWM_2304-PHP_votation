@@ -1,6 +1,6 @@
 <?php 
 
-function helloWorld() : void 
+function helloWorld(): void 
 {
     echo "Hello World !";
 }
