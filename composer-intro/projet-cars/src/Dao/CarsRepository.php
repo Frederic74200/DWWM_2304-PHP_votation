@@ -23,7 +23,14 @@ class CarsRepository
      */
     public function selectAll(): array 
     {
-        return [];
+        $rq = "SELECT car_id, car_brand, car_model, car_price FROM cars;";
+
+        $stmt = $this->db->query($rq);
+
+        $result = $stmt->fetchAll(PDO::FETCH_CLASS, 'App\\Models\\Car');
+
+
+        return $result;
     }
 
     /**

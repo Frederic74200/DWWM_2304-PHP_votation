@@ -6,6 +6,8 @@ use App\Controllers\CarsController;
 use App\Controllers\ErrorController;
 use App\Controllers\HomeController;
 
+use function mb_convert_case;
+
 /**
  * Analyse la requête afin d'identifier le contrôleur à instancier
  */
@@ -70,7 +72,11 @@ class Router
 
         $action = $this->action; // 'index' ou 'update'
 
-        $c->{$action}();
+        if(method_exists($c, $action)) {
+            $c->{$action}();
+        } else {
+            exit('La méthode n\'existe pas');
+        }
 
         exit;
     }

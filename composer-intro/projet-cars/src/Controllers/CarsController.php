@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Dao\CarsRepository;
 use App\Models\Car;
 
 use function trim, file_get_contents;
@@ -15,7 +16,7 @@ class CarsController
 
     public function __construct()
     {
-        echo __CLASS__;
+        //echo __CLASS__;
     }
 
     /**
@@ -23,7 +24,13 @@ class CarsController
      */
     public function index()
     {
-        echo __METHOD__;
+        $repo = new CarsRepository();
+
+        $result = $repo->selectAll();
+
+       echo '<pre>' . var_export($result, true) . '</pre>';
+
+       //echo json_encode($result, JSON_PRETTY_PRINT);
     }
 
      /**

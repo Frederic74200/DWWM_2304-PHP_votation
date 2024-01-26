@@ -25,7 +25,7 @@ class DbConnect
     public static function getInstance(): PDO
     {
         if(self::$instance === null) {
-            self::$instance = new PDO('mysql:host=localhost;port)3306;dbname=db_cars', 'root', '', [
+            self::$instance = new PDO('mysql:host=localhost;port=3306;dbname=db_cars;charset=utf8', 'root', '', [
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES => false,
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
