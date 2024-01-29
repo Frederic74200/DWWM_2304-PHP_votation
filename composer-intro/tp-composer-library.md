@@ -87,3 +87,20 @@ Cette méthode prend en paramètre un chemin vers un fichier de configuration et
 
 
 Une fois terminé, valider et pousser sur github.
+
+Pour tester votre code, vous pouvez implémenter un script qui pourrait ressembler à celui-ci-dessous : 
+
+```php
+<?php 
+
+use nomDutilisateurGithub\Db\DbConnect;
+
+require '../vendor/autoload.php';
+
+DbConnect::setConfiguration('./chemin/vers/config.php');
+
+$pdo = DbConnect::getInstance();
+
+var_dump($pdo); 
+
+```
