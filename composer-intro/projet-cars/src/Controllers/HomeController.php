@@ -13,7 +13,7 @@ class HomeController
 {
     public function __construct()
     {
-        echo __CLASS__;
+        echo 'Vous êtes dans le contrôleur ' . __CLASS__;
     }
 
     /**
@@ -21,6 +21,6 @@ class HomeController
      */
     public function index()
     {
-
+        echo '<hr>Vous êtes dans la méthode ' . __METHOD__;
     }
 }

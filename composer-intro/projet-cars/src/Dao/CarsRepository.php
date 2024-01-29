@@ -6,10 +6,11 @@ use PDO;
 use App\Models\Car;
 
 /**
- * Contient les requêtes vers la base de données pour la talbe "cars"
+ * Contient les requêtes vers la base de données pour la table "cars"
  */
 class CarsRepository 
 {
+    /** @var PDO $db l'instance de PDO utilisée pour l'interaction avec la base de données */
     private PDO $db;
 
 
@@ -19,16 +20,18 @@ class CarsRepository
     }
 
     /**
-     * Récupère toutes les lignes de la table
+     * Récupère toutes les lignes de la table 
+     * @return array le jeu de résultat
      */
     public function selectAll(): array 
     {
+        /** @var string $rq la requête à exécuter */
         $rq = "SELECT car_id, car_brand, car_model, car_price FROM cars;";
 
+        /** @var \PDOStatement $stmt */
         $stmt = $this->db->query($rq);
 
         $result = $stmt->fetchAll(PDO::FETCH_CLASS, 'App\\Models\\Car');
-
 
         return $result;
     }
@@ -40,7 +43,23 @@ class CarsRepository
      */
     public function selectOne(int $car_id): ?Car 
     {
-        return new Car();
+        /** @var string $rq la requête à exécuter */
+        $rq = "SELECT car_id, car_brand, car_model, car_price FROM cars WHERE car_id=:car_id;";
+
+        $stmt = $this->db->prepare($rq);
+
+        //$stmt->bindValue(':car_id', $car_id, PDO::PARAM_INT);
+
+        $values = [':car_id' => $car_id];
+
+        $result = null;
+
+        if($stmt->execute($values)) {
+            $stmt->setFetchMode(PDO::FETCH_CLASS, 'App\\Models\\Car');
+            $result = $stmt->fetch();
+        }
+
+        return $result !== false ? $result : null;
     }
 
     /**
@@ -50,6 +69,25 @@ class CarsRepository
      */
     public function insert(Car $new_car): bool
     {
+        $rq = "INSERT INTO cars 
+                (car_brand, car_model, car_price)
+                VALUES
+                (:car_brand, :car_model, :car_price)";
+
+        $stmt = $this->db->prepare($rq);
+
+        $values= [
+            ':car_brand' => $new_car->car_brand,
+            ':car_model' => $new_car->car_model,
+            ':car_price' => $new_car->car_price
+        ];
+
+        if($stmt->execute($values)) {
+            $lignes = $stmt->rowCount();
+
+            return $lignes === 1;
+        }
+
         return false;
     }
 
@@ -71,5 +109,10 @@ class CarsRepository
     public function delete(int $car_id): bool
     {
         return false;
+    }
+
+    public function lastInsertId() 
+    {
+        return $this->db->lastInsertId();
     }
 }

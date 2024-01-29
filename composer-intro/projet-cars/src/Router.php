@@ -51,7 +51,7 @@ class Router
 
     /**
      * Instancie le contrôleur et exécute l'action
-     * @return never l'application doit stopper à la fin de la méthode
+     * @return never l'application doit stopper à la fin de la méthode (via l'instruction 'exit', par exemple)
      */
     public function run() : never
     {
@@ -73,7 +73,7 @@ class Router
         $action = $this->action; // 'index' ou 'update'
 
         if(method_exists($c, $action)) {
-            $c->{$action}();
+            $c->{$action}($this->id);
         } else {
             exit('La méthode n\'existe pas');
         }
