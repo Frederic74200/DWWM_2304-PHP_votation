@@ -4,6 +4,7 @@ namespace App\Dao;
 
 use PDO;
 use App\Models\Car;
+use Frederic74200\Db\DbConnect;
 
 /**
  * Contient les requêtes vers la base de données pour la table "cars"

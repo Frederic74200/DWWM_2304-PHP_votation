@@ -14,5 +14,17 @@
             "email": "toto@arfp.asso.fr"
         }
     ],
-    "require": {}
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Frederic74200/php-library.git"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "fredric74200/php-library": "dev-main"
+    },
+    "require-dev": {
+
+    }
 }
