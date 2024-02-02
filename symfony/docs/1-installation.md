@@ -1,5 +1,7 @@
 # Créer un projet Symfony 6.4 avec Composer et y installer API-platform
 
+[Documentation officielle de Symfony](https://symfony.com/doc/current/index.html)
+
 # Partie 1 : Installation de Symfony
 
 ```sh
@@ -9,7 +11,23 @@ composer create-project symfony/skeleton:"6.4.*" repertoire_du_projet
 cd repertoire_du_projet
 ```
 
+> Toutes les instructions en ligne de commande doivent être exécutées dans le répertoire du projet.
+
+Pour vérifier que votre installation fonctionne, vous pouvez lancer le serveur web intégré à PHP 
+
+```sh 
+# Lance le serveur web de PHP sur le port 3000 avec le "documentRoot" défini dans le répertoire "public"
+php -S localhost:3000 -t public
+```
+
+Et accéder à l'application via [http://localhost:3000](http://localhost:3000)
+
 ## Installation des dépendances
+
+Nous allons installer 2 dépendances :
+
+1. [api-platform](https://api-platform.com/) : permet de créer et gérer une API
+2. [maker-bundle](https://symfony.com/bundles/SymfonyMakerBundle/current/index.html) : permet de générer des composants en ligne de commande.
 
 ```sh
 # Ajout d'api-platform
@@ -18,16 +36,22 @@ composer require api
 composer require symfony/maker-bundle --dev
 ```
 
+Après l'installation des dépendances, accéder à l'API via [http://localhost:3000/api](http://localhost:3000/api) (pensez à relancer le serveur web si besoin)
+
 ## Créer la base de données et configurer symfony pour cette base de données
 
-Créer la base de donnée dans MySQL
+[Documentation officielle : Bases de données avec Symfony et Doctrine](https://symfony.com/doc/current/doctrine.html)
+
+Créer la bases de donnée dans MySQL. 
 
 Dans le fichier `.env`, décommenter la ligne correspondant à votre serveur de base de données (et commenter les autres). On utilisera ici MySQL
 
 ```sh
 DATABASE_URL="mysql://root@localhost:3306/nom_base_de_donnees?serverVersion=8.0.30&charset=utf8mb4"
 ```
-Adapter le numéro de version avec celui de votre installation MySQL sur Laragon.
+Adapter le numéro de version et le port avec celui de votre installation MySQL ainsi que le nom de la base de données que vous venez de créer.
+
+Par exemple sur Laragon: 
 
 ![Laragon-mysql](./assets/laragon-mysql.jpg)
 
@@ -41,16 +65,25 @@ php bin/console make:entity
 # Répondre aux questions de l'utilitaire (ajout des attributs)
 ```
 
-## Appliquer les migrations
+## Appliquer les migrations 
+
+Une migration est l'opération qui permet de "synchroniser" vos entités avec une base de données. En d'autres termes, le framework compare vos entités avec l'état actuel de la base de données et les fait correspondre.
+
+Par exemple, Une entité `Car` avec 2 attributs `brand` et `model` créera une table `car` avec les colonnes correspondants aux attributs de l'entité.
+
+Une migration se déroule en 2 étapes : 
+
+1. Création d'un script où sont générées les requêtes SQL à exécuter
+2. Exécution des requêtes SQL
 
 ```sh
-# Créer la migration
+# Étape 1 : Créer la migration
 php bin/console make:migration
-# Appliquer la migration (met à jour la base de données)
+# Étape 2 : Appliquer la migration (met à jour la base de données)
 php bin/console doctrine:migrations:migrate
 ```
 
-Une fois votre ou vos entités créé et migrées, lancer le serveur web de PHP
+Une fois votre ou vos entités créées et migrées, lancer le serveur web de PHP
 
 ```sh
 php -S localhost:3000 -t public

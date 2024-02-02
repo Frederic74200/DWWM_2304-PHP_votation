@@ -12,26 +12,28 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ORM\Entity(repositoryClass: CarRepository::class)]
-#[ApiResource(normalizationContext: ['groups' => ['car']])]
+#[ApiResource(
+    normalizationContext: ['groups' => ['car']]
+)]
 class Car
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('car')]
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
     #[SerializedName('carBrand')]
-    #[Groups('car')]
+    #[Groups(['car', 'register'])]
     private ?string $car_brand = null;
 
     #[ORM\Column(length: 50)]
     #[SerializedName('carModel')]
-    #[Groups('car')]
+    #[Groups(['car', 'register'])]
     private ?string $car_model = null;
 
     #[ORM\Column]
-    #[Groups('car')]
     #[SerializedName('carPrice')]
     private ?int $car_price = null;
 

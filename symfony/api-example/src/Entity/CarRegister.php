@@ -11,26 +11,29 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
 #[ORM\Entity(repositoryClass: CarRegisterRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['register']]
+)]
 class CarRegister
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups('car')]
+    #[Groups(['car', 'register'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 11)]
     #[SerializedName('carRegistration')]
-    #[Groups('car')]
+    #[Groups(['car', 'register'])]
     private ?string $car_registration = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[SerializedName('carDate')]
-    #[Groups('car')]
+    #[Groups(['car', 'register'])]
     private ?\DateTimeInterface $car_date = null;
 
     #[ORM\ManyToOne(inversedBy: 'carRegisters')]
+    #[Groups(['register'])]
     private ?Car $car = null;
 
     public function getId(): ?int
