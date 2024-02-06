@@ -14,7 +14,7 @@ Proposition de base de données
 
 ## Installation du projet : 
 
-1. Créer la base de données (voir le fichier db_votations.sql)
+1. Créer la base de données (voir le fichier [db_votations.sql](./db_votations.sql))
 2. Créer le répertoire du projet et s'y positionner avec un terminal
 3. Créer un projet **Symfony** :  `composer create-project symfony/skeleton:"6.4.*" .`
 4. Installer **api-platform** : `composer require api`
