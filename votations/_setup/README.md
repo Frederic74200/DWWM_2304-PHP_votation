@@ -29,7 +29,7 @@ Proposition de base de données
 1. Ajouter 1 session de votes à 2 tours
     - 3 représentants sont à élire
 2. Ajouter 10 candidats à la session de vote.
-    - Voir le dossier [candidats](./candidats/) pour voir la liste des candidats à ajouter ainsi que leurs portraits.
+    - Voir le dossier [public/assets/candidats](../public/assets/candidats/) pour voir la liste des candidats à ajouter ainsi que leurs portraits.
 
 ## Modéliser le logiciel client
 
