@@ -1,5 +1,13 @@
 controllers:
     resource:
         path: ../src/Controller/
-        namespace: App\Controller
+        namespace: App\Controller   
     type: attribute
+
+   # candidats:
+       # path: /Candidats
+       # controller: App\Controller\Candidats\CandidatsController::index
+
+        
+        
+        

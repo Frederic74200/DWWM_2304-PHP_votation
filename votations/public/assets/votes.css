@@ -9,7 +9,7 @@ html {
 body {
     margin: 0;
     padding: 0;
-    font-size:1.6rem;
+    font-size: 1.6rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -23,7 +23,8 @@ footer {
     text-align: center;
 }
 
-.menu, .menu > ul {
+.menu,
+.menu>ul {
     display: flex;
     justify-content: end;
     list-style: none;
@@ -63,4 +64,29 @@ footer {
 
 .voter:hover {
     background-color: #00CC00CC;
+}
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+h2 {
+    text-align: center;
+    position: relative;
+    top: 13%;
+    color: transparent;
+    font-size: 1.3em;
+    transform: rotateY(180deg);
+}
+
+section div:hover {
+    transform: rotateY(180deg);
+    transition-duration: 3000ms
+}
+
+section div:hover h2 {
+    color: #FFFFFF;
+    text-shadow: 0 0 2px #000000;
+
 }
