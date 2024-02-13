@@ -1,8 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Liste des candidats{% endblock %}
+  {% block javascripts %} <script src="./assets/votes.js" type="module"></script> 
+  {% endblock %}
 
 {% block body %}
+
     <header>
         <nav class="menu">
             <ul>
@@ -11,6 +14,8 @@
             </ul>
         </nav>
     </header>
+    {% verbatim %}
+
     <main id="app">
         <h1 class="center">Élections des 3 représentants du conseil</h1>
         <p class="center">{{ nbCandidats }} candidats</p>
@@ -20,24 +25,29 @@
     <th>Photo</th>
     <th>Nom</th>
     <th>Prémon</th>
-    <th colspan > Soutenir ce cnadidat</th>
+    <th>Slogan</th>
+    <th colspan > Soutenir ce candidat</th>
     <th></th>
 </tr></thead>
 <tbody>
-  {% for candidat in candidats %}
-    <tr>
-        <td>  <img src="http://localhost:3000/assets/candidats/{{candidat['id']}}.jpg " alt="{{candidat['id']}}"></td>
-        <td>{{ candidat['nom] }}</td>
-        <td>{{ candidat['prenom] }}</td>
-        <td> <button type="button">Oui</button> </td>
-        <td><button type="button">Non</button> </td>
-    </tr>
-    
-        {% endfor %}
+
+ <tr v-for=" item of listeRand">
+               <td class="ppCandidat" :style="{ 'background-image': 'url(http://localhost:3000/assets/candidats/' + item.candidat_id + '.jpg)', 'background-size': 'contain',  'background-repeat': 'no-repeat' }"></td>
+                <td>{{item.candidat_nom}}</td>
+                <td>{{item.candidat_prenom}}</td>
+                <td>{{item.candidat_slog}}</td>
+                <td></td>
+                <td></td>
+ </tr>
+
+
+ 
 </tbody>
     </table>
-       
+    
     </main>
+    {% endverbatim %}
+
     <footer>
         <p>Copyright 2024 DWWM2304</p>
     </footer>
